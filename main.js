@@ -1,4 +1,14 @@
 // constants
-const buttons = document.querySelector("buttons");
+const buttons = document.querySelectorAll("button");
 
-//functions
+
+//variables
+let selection;
+
+buttons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        selection = button.value;
+        console.log(button.value);
+    })
+})
+
