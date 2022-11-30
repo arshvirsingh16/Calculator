@@ -9,9 +9,10 @@ const op_buttons = document.querySelectorAll("#op_button");
 let selection;
 let operation;
 let picked_op;
-let temp_num_one = 0;
-let num_one;
+let temp_num = 0;
+let num_one = null;
 let num_two = 0;
+let getNUM = 'one';
 
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
@@ -26,11 +27,20 @@ buttons.forEach(button => {
 num_buttons.forEach(button => {
     button.addEventListener("click", (e) => {
         selection = button.value;
-        temp_num_one += selection;
-        if(picked_op == 'op_button'){
+        temp_num += selection;
+        console.log(temp_num);
+        if(picked_op == 'op_button' && getNUM == 'one'){
             picked_op = null;
-            num_one = temp_num_one;
-            console.log(num_one); 
+            num_one = temp_num;
+            getNUM = 'two'
+            console.log('is '+num_one); 
+        }
+
+        if(num_one == null && picked_op == 'op_button' && getNUM == 'two'){
+            picked_op = null;
+            num_two = temp_num;
+            getNUM = 'one';
+            console.log(num_two + 'istwo');
         }
         
     })
