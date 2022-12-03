@@ -3,126 +3,97 @@ const buttons = document.querySelectorAll(".button");
 const screen = document.querySelector("#screen");
 const num_buttons = document.querySelectorAll("#num_button");
 const op_buttons = document.querySelectorAll("#op_button");
-const num_array = [];
 
-//global variables
-let selection;
-let operation;
-let picked_op;
+
+//variables
 let temp_num = '';
-let id;
-let num_one = null;
-let num_two = null;
-let once = 0;
-let i = 0;
+let num_op = null;
+
 let numbers = {
     num_one: '',
-    num_two: ''
-
+    num_two: '',
+    operator: ''
 }
 
-
-buttons.forEach(button => {
-    button.addEventListener("click", (e) => {
-        selection = button.value;
-        id = button.id;
-        create_num(selection);
-        store_num(temp_num, id);
-        clear_num(id);
-        if(!num_one && !num_two && once == 1){
-            calc_operation();
-        }
-         console.log(selection);
-    })
+num_buttons.forEach(number => {
+    number.addEventListener('click', create_num);
 })
-
-// num_buttons.forEach(button => {
-//     button.addEventListener("click", (e) => {
-//         // selection = button.value;
-//         temp_num += selection;
-//         console.log(temp_num);
-//         // if(picked_op == 'op_button' && getNUM == 'one'){
-//         //     picked_op = null;
-//         //     num_one = temp_num;
-//         //     getNUM = 'two'
-//         //     console.log('is '+num_one); 
-//         // }
-
-//         // if(num_one == null && picked_op == 'op_button' && getNUM == 'two'){
-//         //     picked_op = null;
-//         //     num_two = temp_num;
-//         //     getNUM = 'one';
-//         //     console.log(num_two + 'istwo');
-//         // }
-        
-//     })
-// })
-
 op_buttons.forEach(button => {
-    button.addEventListener("click", (e) => {
-        operation = button.value;
-        // store_num(temp_num);
-        // console.log(operation);
-    })
+    button.addEventListener("click", update_operator)
 })
 
-
-
-function create_num(){
-    temp_num += selection;
+function create_num(e){
+    temp_num += e.target.value;
     screen.innerHTML = temp_num;
+    return temp_num;
+    // console.log(e.target.value);
 }
 
-function clear_num() {
-    if (id == 'op_button'){
-        temp_num = '';
-        screen.innerHTML = temp_num;
+function update_operator(e){
+        switch (e.target.value){
+            case '+' : clear_screen(), store_num(), numbers.operator = '+'; 
+            case '-' : clear_screen(), store_num(), numbers.operator = '-'; 
+            case 'x' : clear_screen(), store_num(), numbers.operator = 'x'; 
+            case '/' : clear_screen(), store_num(), numbers.operator = '/'; 
+            case '=' : clear_screen(); //calc_operation(operator); 
+            default  : return;
+        }
+}
+
+function clear_screen() {
+        screen.innerHTML = '';
         return null;
-    }
 }
 
 function store_num(){
-   if(id == 'op_button'){
-    numbers.num_one = `${temp_num}`;
-    console.log('is'+ numbers.num_one);
+   if(!num_op){
+    numbers.num_one = temp_num;
+    console.log('num_one: '+ numbers.num_one);
    }
+   if(num_op == 1){
+    numbers.num_two = temp_num;
+    console.log('num_two: '+ numbers.num_one);
+   }
+   num_op = 1;
+   temp_num = '';
 }
 
-function calc_operation() {
-        switch (selection){
-            case '+' : add_func();
-            case '-' : sub_func();
-            case 'x' : mult_func();
-            case '/' : divi_func();
-            default  : return;
-        }
-    }
+// function calc_operation(operator) {
+//         switch (operator){
+//             case '+' : add_func();
+//             case '-' : sub_func();
+//             case 'x' : mult_func();
+//             case '/' : divi_func();
+//             default  : return;
+//         }
+//     }
     
-    function add_func(num_one, num_two) {
-        let result = 0;
-        result = num_one + num_two;
-        return result;
-    }
+//     function add_func(num_one, num_two) {
+//         let result = 0;
+//         result = num_one + num_two;
+//         return result;
+//     }
     
-    function sub_func(num_one, num_two) {
-        let result = 0;
-        result = num_one - num_two;
-        return result;
-    }
+//     function sub_func(num_one, num_two) {
+//         let result = 0;
+//         result = num_one - num_two;
+//         return result;
+//     }
     
-    function mult_func(num_one, num_two) {
-        let result = 0;
-        result = num_one * num_two;
-        return result;
-    }
+//     function mult_func(num_one, num_two) {
+//         let result = 0;
+//         result = num_one * num_two;
+//         return result;
+//     }
     
-    function divi_func(num_one, num_two) {
-        let result = 0;
-        result = num_one / num_two;
-        return result;
-    }
+//     function divi_func(num_one, num_two) {
+//         let result = 0;
+//         result = num_one / num_two;
+//         return result;
+//     }
 
 
 
 
-
+//update number, update operator, update display, clear, operate
+//equ
