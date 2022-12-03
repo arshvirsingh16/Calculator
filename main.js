@@ -13,14 +13,25 @@ let temp_num = '';
 let id;
 let num_one = null;
 let num_two = null;
+let once = 0;
 let i = 0;
+let numbers = {
+    num_one: '',
+    num_two: ''
+
+}
+
 
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
         selection = button.value;
+        id = button.id;
         create_num(selection);
-        clear_num(selection);
-         id = button.id;
+        store_num(temp_num, id);
+        clear_num(id);
+        if(!num_one && !num_two && once == 1){
+            calc_operation();
+        }
          console.log(selection);
     })
 })
@@ -50,70 +61,66 @@ buttons.forEach(button => {
 op_buttons.forEach(button => {
     button.addEventListener("click", (e) => {
         operation = button.value;
-        store_num(temp_num);
+        // store_num(temp_num);
         // console.log(operation);
     })
 })
 
 
 
-function create_num(selection){
-    // if(selection == 'clr' || selection =='='){
-    //     temp_num = '';
-    //     screen.innerHTML = temp_num;
-    //     return null;
-    // }
+function create_num(){
     temp_num += selection;
     screen.innerHTML = temp_num;
 }
 
-function clear_num(selection) {
-    if(selection == 'clr' || selection =='='){
+function clear_num() {
+    if (id == 'op_button'){
         temp_num = '';
         screen.innerHTML = temp_num;
         return null;
     }
 }
 
-function store_num(temp_num){
-    num_array[i] = temp_num;
-    screen.innerHTML = num_array;
-    i++;
+function store_num(){
+   if(id == 'op_button'){
+    numbers.num_one = `${temp_num}`;
+    console.log('is'+ numbers.num_one);
+   }
 }
 
-// function calc_operation(selection) {
-    //     switch (selection){
-    //         case '+' : add_func();
-    //         case '-' : sub_func();
-    //         case 'x' : mult_func();
-    //         case '/' : divi_func();
-    //         default  : return;
-    //     }
-    // }
+function calc_operation() {
+        switch (selection){
+            case '+' : add_func();
+            case '-' : sub_func();
+            case 'x' : mult_func();
+            case '/' : divi_func();
+            default  : return;
+        }
+    }
     
-    // function add_func(num_one, num_two) {
-    //     let result = 0;
-    //     result = num_one + num_two;
-    //     return result;
-    // }
+    function add_func(num_one, num_two) {
+        let result = 0;
+        result = num_one + num_two;
+        return result;
+    }
     
-    // function sub_func(num_one, num_two) {
-    //     let result = 0;
-    //     result = num_one - num_two;
-    //     return result;
-    // }
+    function sub_func(num_one, num_two) {
+        let result = 0;
+        result = num_one - num_two;
+        return result;
+    }
     
-    // function mult_func(num_one, num_two) {
-    //     let result = 0;
-    //     result = num_one * num_two;
-    //     return result;
-    // }
+    function mult_func(num_one, num_two) {
+        let result = 0;
+        result = num_one * num_two;
+        return result;
+    }
     
-    // function divi_func(num_one, num_two) {
-    //     let result = 0;
-    //     result = num_one / num_two;
-    //     return result;
-    // }
+    function divi_func(num_one, num_two) {
+        let result = 0;
+        result = num_one / num_two;
+        return result;
+    }
 
 
 
