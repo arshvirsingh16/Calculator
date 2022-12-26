@@ -1,13 +1,15 @@
 // constants
-const buttons = document.querySelectorAll(".button");
-const screen = document.querySelector("#screen");
-const num_buttons = document.querySelectorAll("#num_button");
-const op_buttons = document.querySelectorAll("#op_button");
+const num_buttons = document.querySelectorAll(".num-button");
+
+num_buttons.forEach(button => {
+    button.addEventListener('click', create_num());
+})
+
 
 
 //variables
 let temp_num = '';
-let num_op = null;
+let num_op = 0;
 
 let numbers = {
     num_one: '',
@@ -15,48 +17,50 @@ let numbers = {
     operator: ''
 }
 
-num_buttons.forEach(number => {
-    number.addEventListener('click', create_num);
-})
-op_buttons.forEach(button => {
-    button.addEventListener("click", update_operator)
-})
+// num_buttons.forEach(number => {
+//     number.addEventListener('click', create_num);
+// })
+// op_buttons.forEach(operator => {
+//     operator.addEventListener("click", update_operator,{
+//         capture: false
+//     })
+// })
 
 function create_num(e){
-    temp_num += e.target.value;
-    screen.innerHTML = temp_num;
-    return temp_num;
-    // console.log(e.target.value);
+  
+    console.log();
+    
 }
 
-function update_operator(e){
-        switch (e.target.value){
-            case '+' : clear_screen(), store_num(), numbers.operator = '+'; 
-            case '-' : clear_screen(), store_num(), numbers.operator = '-'; 
-            case 'x' : clear_screen(), store_num(), numbers.operator = 'x'; 
-            case '/' : clear_screen(), store_num(), numbers.operator = '/'; 
-            case '=' : clear_screen(); //calc_operation(operator); 
-            default  : return;
-        }
-}
+// function update_operator(e){
+//     e.stopPropagation();
+//         switch (e.target.value){
+//             case '+' : clear_screen(), store_num(), numbers.operator = '+'; 
+//             case '-' : clear_screen(), store_num(), numbers.operator = '-'; 
+//             case '*' : clear_screen(), store_num(), numbers.operator = '*'; 
+//             case '/' : clear_screen(), store_num(), numbers.operator = '/'; 
+//             case '=' : clear_screen(); //calc_operation(operator); 
+//             default  : return;
+//         }
+// }
 
-function clear_screen() {
-        screen.innerHTML = '';
-        return null;
-}
+// function clear_screen() {
+//         screen.innerHTML = '';
+//         return null;
+// }
 
-function store_num(){
-   if(!num_op){
-    numbers.num_one = temp_num;
-    console.log('num_one: '+ numbers.num_one);
-   }
-   if(num_op == 1){
-    numbers.num_two = temp_num;
-    console.log('num_two: '+ numbers.num_one);
-   }
-   num_op = 1;
-   temp_num = '';
-}
+// function store_num(){
+//    if(num_op == 0){
+//     numbers.num_one = temp_num;
+//     console.log('num_one: '+ numbers.num_one);
+//    }
+//    if(num_op == 1){
+//     numbers.num_two = temp_num;
+//     console.log('num_two: '+ numbers.num_one);
+//    }
+//    num_op = 1;
+//    temp_num = '';
+// }
 
 // function calc_operation(operator) {
 //         switch (operator){

@@ -1,95 +1,45 @@
-body {
-    background: #ffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+body{
+    font-weight: normal;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0;
+    margin: 0;
+    background-color: gray;
 }
 
 .calculatorContainer{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    width: 1000px;
-    height: 1000px;
-    border: #121212 solid;
-    border-radius: 10px;
-}
-
-.screen {
-    width: 900px;
-    height: 200px;
-    border: #121212 solid;
-    margin-top: 20px;
-    border-radius: 5px;
-    font-size: 60px;
-    display: flex;
-    justify-content: right;
-    align-items: flex-end;
-}
-
-.buttons {
-    height: 700px;
-    width: 900px;
-    border: #121212 solid;
-    margin-top: 20px;
-    display: flex;
-}
-
-.numbers{
-    height: 650px;
-    width: 650px;
-    /* border: #121212 solid; */
-    margin: 20px 0px 0px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.operations{
-    height: 650px;
-    width: 200px;
-    /* border: #121212 solid; */
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.rowOne, .rowTwo, .rowThree, .rowFour{
-    display:flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.one, .two, .three, .four, .five, .six, .seven, .eight, 
-.nine, .decimal, .zero, .equal {
-    width: 180px;
-    height: 140px;
-    border: red solid;
-    font-size: 60px;
-    display:flex;
+    display: grid;
     justify-content: center;
-    align-items: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+
 }
 
-.add, .subtract, .multiply, .divide, .clear {
-    width: 180px;
-    height: 100px;
-    border: red solid;
-    font-size: 60px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+.calculatorContainer > button{
+    font-size: 2rem;
+    border: 1px, solid, white;
+    cursor: pointer;
+    outline: none;
+    background-color:  whitesmoke;
 }
 
-.button{
-    border: none;
-    height: 140px;
-    width: 180px;
-    background-color: #ffff;
-    font-size: 50px;
+.calculatorContainer > button:hover{
+    background-color: white;
 }
 
+.span-two{
+    grid-column: span 2;
+}
 
-
+.screen{
+    grid-column: 1/-1;
+    background-color: rgba(0,0,0,.85);
+    font-size: large;
+    color: whitesmoke;
+    display: flex;
+    align-items:flex-end;
+    justify-content: end;
+    word-wrap: break-word;
+    word-break: break-all;
+}
