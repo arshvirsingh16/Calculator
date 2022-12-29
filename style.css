@@ -42,4 +42,5 @@ body{
     justify-content: end;
     word-wrap: break-word;
     word-break: break-all;
+    font-size: 30px;
 }
