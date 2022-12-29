@@ -52,10 +52,11 @@ function deleteNumber(){
 function chooseOperator(e){
     if(previousNumber != '' && number != '')
         calculate();
-    if(previousNumber != '' && e) return;
-
     operator = e;
     screen.innerHTML = number + e;
+    if(previousNumber != '' && e)
+    // operator = e; 
+    return; //cannot press operator multiple times
     previousNumber = number;
     number = '';
 }
@@ -65,6 +66,7 @@ function calculate(){
     const currentValue = parseFloat(number);
     console.log('previousValue: ' + previousValue);
     console.log('currentValue: ' + currentValue)
+    console.log(operator);
     if(isNaN(previousValue) || isNaN(currentValue)) 
         return;
     switch(operator){
@@ -79,9 +81,11 @@ function calculate(){
         break;
         case '/' : computation = previousValue / currentValue;
         break;
+        default: return;
     }
      
     screen.innerHTML = computation;
     previousNumber = computation;
     number = '';
+    operator = undefined;
 }
