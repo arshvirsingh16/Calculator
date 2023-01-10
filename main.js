@@ -46,17 +46,24 @@ function allClear(){
 }
 
 function deleteNumber(){
-
+    console.log("del");
+    number = number.slice(0,-1);
+    updateDisplay();
 }
 
 function chooseOperator(e){
+
     if(previousNumber != '' && number != '')
+    {
         calculate();
+        operator = e;
+    }
+    
+
+    if(previousNumber != '' && e) return;
+
     operator = e;
     screen.innerHTML = number + e;
-    if(previousNumber != '' && e)
-    // operator = e; 
-    return; //cannot press operator multiple times
     previousNumber = number;
     number = '';
 }
@@ -67,8 +74,9 @@ function calculate(){
     console.log('previousValue: ' + previousValue);
     console.log('currentValue: ' + currentValue)
     console.log(operator);
-    if(isNaN(previousValue) || isNaN(currentValue)) 
-        return;
+    if(isNaN(previousValue) || isNaN(currentValue))
+        { screen.innerHTML = "SYNTAX ERROR";
+            return;}
     switch(operator){
         case '+' : 
         computation = previousValue + currentValue;
@@ -79,13 +87,17 @@ function calculate(){
         case '*' : 
         computation = previousValue * currentValue;
         break;
-        case '/' : computation = previousValue / currentValue;
-        break;
+        case '/' : 
+        if(currentValue == 0){
+            screen.innerHTML = "ERROR";
+            break;
+        }
+            computation = previousValue / currentValue;
+            break;
         default: return;
     }
      
     screen.innerHTML = computation;
     previousNumber = computation;
     number = '';
-    operator = undefined;
 }
